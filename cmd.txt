@@ -1,0 +1,12 @@
+Get-ChildItem C:\wamp64 -Recurse -Filter *.php -File |
+    Select-String -Pattern 'function\s+checkPhpConf' -Context 0,45
+
+
+
+Select-String -Path "C:\wamp64\scripts\*.php" `
+    -Pattern 'phpVersionList|checkPhpConf|phpVersionDir' |
+    Select-Object Path, LineNumber, Line
+
+
+C:\wamp64\bin\php\php8.5.12\php.exe -i 2>&1 |
+    Select-String 'Warning|Error|Unable'
