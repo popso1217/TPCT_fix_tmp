@@ -11,24 +11,7 @@ Select-String -Path "C:\wamp64\scripts\*.php" `
 C:\wamp64\bin\php\php8.5.12\php.exe -i 2>&1 |
     Select-String 'Warning|Error|Unable'
 
-\Log::info('PHP CHECK', [
-    'version' => PHP_VERSION,
-    'sapi' => PHP_SAPI,
-    'ini' => php_ini_loaded_file(),
-    'extension_dir' => ini_get('extension_dir'),
-    'curl_loaded' => extension_loaded('curl'),
-    'curl_exists' => function_exists('curl_init'),
-]);
-[2026-10-27 13:05:50] test.INFO: PHP CHECK {"version":"8.5.12","sapi":"apache2handler","ini":"C:\\wamp64\\bin\\apache\\apache2.4.65\\bin\\php.ini","extension_dir":"c:/wamp64/bin/php/php8.5.12/ext/","curl_loaded":false,"curl_exists":false} 
-Select-String -Path "C:\wamp64\bin\apache\apache2.4.65\bin\php.ini" -Pattern "extension_dir|extension=curl"
-bool(true)
-PS C:\wamp64> Select-String -Path "C:\wamp64\bin\apache\apache2.4.65\bin\php.ini" -Pattern "extension_dir|extension=curl"
+Get-Content "C:\wamp64\logs\apache_error.log" -Tail 200 |
+    Select-String -Pattern "curl|PHP Startup|Unable to load|DLL" -Context 2,2
 
-bin\apache\apache2.4.65\bin\php.ini:764:;extension_dir = "./"
-bin\apache\apache2.4.65\bin\php.ini:766:extension_dir ="c:/wamp64/bin/php/php8.5.12/ext/"
-bin\apache\apache2.4.65\bin\php.ini:922:;   Be sure to appropriately set the extension_dir directive.
-bin\apache\apache2.4.65\bin\php.ini:926:extension=curl
-bin\apache\apache2.4.65\bin\php.ini:1033:;sqlite3.extension_dir =
-
-
-PS C:\wamp64>
+Get-ChildItem "C:\wamp64\logs" -Filter "*apache*"
