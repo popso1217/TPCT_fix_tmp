@@ -10,3 +10,10 @@ Select-String -Path "C:\wamp64\scripts\*.php" `
 
 C:\wamp64\bin\php\php8.5.12\php.exe -i 2>&1 |
     Select-String 'Warning|Error|Unable'
+
+
+cd C:\wamp64\www
+
+Get-ChildItem -Recurse -Filter *.php -File |
+    Select-String -Pattern 'ixudra\s*\(' |
+    Select-Object Path, LineNumber, Line
