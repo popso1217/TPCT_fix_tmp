@@ -19,6 +19,24 @@ Get-ChildItem -Recurse -Filter *.php -File |
     Select-Object Path, LineNumber, Line
 
 
+
+C:\wamp64\bin\php\php8.5.12\php.exe -r "var_dump(extension_loaded('curl'), function_exists('curl_init'));"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 [2026-10-27 12:56:24] test.INFO: E7.URL.compose {"base":"http://www.ie7.com.tw","path":"e7Core/Mobile/Auth/Login","full":"http://www.ie7.com.tw/e7Core/Mobile/Auth/Login"} 
 [2026-10-27 12:56:24] test.INFO: E7.HTTP.req {"method":"POST","url":"http://www.ie7.com.tw/e7Core/Mobile/Auth/Login"} 
 [2026-10-27 12:56:24] test.ERROR: Call to undefined function Ixudra\Curl\curl_init() {"exception":"[object] (Error(code: 0): Call to undefined function Ixudra\\Curl\\curl_init() at C:\\wamp64\\www\\TPCT\\vendor\\ixudra\\curl\\src\\Builder.php:539)
