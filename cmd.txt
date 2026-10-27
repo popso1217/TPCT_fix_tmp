@@ -11,48 +11,11 @@ Select-String -Path "C:\wamp64\scripts\*.php" `
 C:\wamp64\bin\php\php8.5.12\php.exe -i 2>&1 |
     Select-String 'Warning|Error|Unable'
 
-
-cd C:\wamp64\www
-
-Get-ChildItem -Recurse -Filter *.php -File |
-    Select-String -Pattern 'ixudra\s*\(' |
-    Select-Object Path, LineNumber, Line
-
-
-
-C:\wamp64\bin\php\php8.5.12\php.exe -r "var_dump(extension_loaded('curl'), function_exists('curl_init'));"
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-[2026-10-27 12:56:24] test.INFO: E7.URL.compose {"base":"http://www.ie7.com.tw","path":"e7Core/Mobile/Auth/Login","full":"http://www.ie7.com.tw/e7Core/Mobile/Auth/Login"} 
-[2026-10-27 12:56:24] test.INFO: E7.HTTP.req {"method":"POST","url":"http://www.ie7.com.tw/e7Core/Mobile/Auth/Login"} 
-[2026-10-27 12:56:24] test.ERROR: Call to undefined function Ixudra\Curl\curl_init() {"exception":"[object] (Error(code: 0): Call to undefined function Ixudra\\Curl\\curl_init() at C:\\wamp64\\www\\TPCT\\vendor\\ixudra\\curl\\src\\Builder.php:539)
-[stacktrace]
-#0 C:\\wamp64\\www\\TPCT\\vendor\\ixudra\\curl\\src\\Builder.php(414): Ixudra\\Curl\\Builder->send()
-#1 C:\\wamp64\\www\\TPCT\\app\\Packages\\ie7\\external\\Core\\Service\\PlatformService.php(78): Ixudra\\Curl\\Builder->post()
-#2 C:\\wamp64\\www\\TPCT\\app\\Packages\\ie7\\external\\Core\\Service\\PlatformService.php(92): Ie7\\External\\Core\\Service\\PlatformService->doPost('e7Core/Mobile/A...', Object(Ie7\\External\\Member\\Entity\\Login))
-#3 C:\\wamp64\\www\\TPCT\\app\\Packages\\ie7\\external\\Member\\Service\\MemberService.php(30): Ie7\\External\\Core\\Service\\PlatformService->request('e7Core/Mobile/A...', Object(Ie7\\External\\Member\\Entity\\Login))
-#4 C:\\wamp64\\www\\TPCT\\app\\Http\\Controllers\\Mobile\\UserController.php(231): Ie7\\External\\Member\\Service\\MemberService->Login(Object(Ie7\\External\\Member\\Entity\\Login))
-#5 C:\\wamp64\\www\\TPCT\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Controller.php(54): App\\Http\\Controllers\\Mobile\\UserController->login(Object(App\\Http\\Requests\\Mobile\\Account\\LoginRequest))
-#6 C:\\wamp64\\www\\TPCT\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\ControllerDispatcher.php(43): Illuminate\\Routing\\Controller->callAction('login', Array)
-#7 C:\\wamp64\\www\\TPCT\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Route.php(259): Illuminate\\Routing\\ControllerDispatcher->dispatch(Object(Illuminate\\Routing\\Route), Object(App\\Http\\Controllers\\Mobile\\UserController), 'login')
-#8 C:\\wamp64\\www\\TPCT\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Route.php(205): Illuminate\\Routing\\Route->runController()
-#9 C:\\wamp64\\www\\TPCT\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php(806): Illuminate\\Routing\\Route->run()
-#10 C:\\wamp64\\www\\TPCT\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(144): Illuminate\\Routing\\Router->{closure:Illuminate\\Routing\\Router::runRouteWithinStack():805}(Object(Illuminate\\Http\\Request))
-#11 C:\\wamp64\\www\\TPCT\\app\\Http\\Middleware\\MobileMiddleware.php(43): Illuminate\\Pipeline\\Pipeline->{closure:Illuminate\\Pipeline\\Pipeline::prepareDestination():142}(Object(Illuminate\\Http\\Request))
-#12 C:\\wamp64\\www\\TPCT\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(183): App\\Http\\Middleware\\MobileMiddleware->handle(Object(Illuminate\\Http\\Request), Object(Closure))
-#13 C:\\wamp64\\www\\TPCT\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(119): Illuminate\\Pipeline\\Pipeline->{closure:{closure:Illuminate\\Pipeline\\Pipeline::carry():158}:159}(Object(Illuminate\\Http\\Request))
-#14 C:\\wamp64\\www\\TPCT\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php(805): Illuminate\\Pipeline\\Pipeline->then(Object(Closure))
+\Log::info('PHP CHECK', [
+    'version' => PHP_VERSION,
+    'sapi' => PHP_SAPI,
+    'ini' => php_ini_loaded_file(),
+    'extension_dir' => ini_get('extension_dir'),
+    'curl_loaded' => extension_loaded('curl'),
+    'curl_exists' => function_exists('curl_init'),
+]);
