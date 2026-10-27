@@ -20,3 +20,4 @@ C:\wamp64\bin\php\php8.5.12\php.exe -i 2>&1 |
     'curl_exists' => function_exists('curl_init'),
 ]);
 [2026-10-27 13:05:50] test.INFO: PHP CHECK {"version":"8.5.12","sapi":"apache2handler","ini":"C:\\wamp64\\bin\\apache\\apache2.4.65\\bin\\php.ini","extension_dir":"c:/wamp64/bin/php/php8.5.12/ext/","curl_loaded":false,"curl_exists":false} 
+Select-String -Path "C:\wamp64\bin\apache\apache2.4.65\bin\php.ini" -Pattern "extension_dir|extension=curl"
