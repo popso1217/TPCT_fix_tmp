@@ -13,33 +13,16 @@ C:\wamp64\bin\php\php8.5.12\php.exe -i 2>&1 |
 
 
 
-PID: 18412
-Module Count: 152
+Get-Process httpd | ForEach-Object {
+    $processId = $_.Id
 
-PID: 19304
-Module Count: 114
-ModuleName       FileName
-----------       --------
-httpd.exe        C:\wamp64\bin\apache\apache2.4.65\bin\httpd.exe
-ntdll.dll        C:\Windows\SYSTEM32\ntdll.dll
-KERNEL32.DLL     C:\Windows\System32\KERNEL32.DLL
-KERNELBASE.dll   C:\Windows\System32\KERNELBASE.dll
-libaprutil-1.dll C:\wamp64\bin\apache\apache2.4.65\bin\libaprutil-1.dll
-ucrtbase.dll     C:\Windows\System32\ucrtbase.dll
-libhttpd.dll     C:\wamp64\bin\apache\apache2.4.65\bin\libhttpd.dll
-libapr-1.dll     C:\wamp64\bin\apache\apache2.4.65\bin\libapr-1.dll
-VCRUNTIME140.dll C:\Windows\SYSTEM32\VCRUNTIME140.dll
-WS2_32.dll       C:\Windows\System32\WS2_32.dll
-httpd.exe        c:\wamp64\bin\apache\apache2.4.65\bin\httpd.exe
-ntdll.dll        C:\Windows\SYSTEM32\ntdll.dll
-KERNEL32.DLL     C:\Windows\System32\KERNEL32.DLL
-KERNELBASE.dll   C:\Windows\System32\KERNELBASE.dll
-ucrtbase.dll     C:\Windows\System32\ucrtbase.dll
-libaprutil-1.dll c:\wamp64\bin\apache\apache2.4.65\bin\libaprutil-1.dll
-libapr-1.dll     c:\wamp64\bin\apache\apache2.4.65\bin\libapr-1.dll
-libhttpd.dll     c:\wamp64\bin\apache\apache2.4.65\bin\libhttpd.dll
-VCRUNTIME140.dll C:\Windows\SYSTEM32\VCRUNTIME140.dll
-WS2_32.dll       C:\Windows\System32\WS2_32.dll
-
-
-PS C:\Windows\system32>
+    $_.Modules |
+        Where-Object {
+            $_.ModuleName -match 'curl|ssl|crypto|ssh|nghttp|php'
+        } |
+        Select-Object `
+            @{N='PID';E={$processId}},
+            ModuleName,
+            FileName,
+            @{N='Version';E={$_.FileVersionInfo.FileVersion}}
+} | Format-List
