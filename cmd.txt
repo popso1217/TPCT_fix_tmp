@@ -13,16 +13,311 @@ C:\wamp64\bin\php\php8.5.12\php.exe -i 2>&1 |
 
 
 
-Get-Process httpd | ForEach-Object {
-    $processId = $_.Id
+PID        : 18412
+ModuleName : libcrypto-3-x64.dll
+FileName   : C:\wamp64\bin\apache\apache2.4.65\bin\libcrypto-3-x64.dll
+Version    : 3.5.1
 
-    $_.Modules |
-        Where-Object {
-            $_.ModuleName -match 'curl|ssl|crypto|ssh|nghttp|php'
-        } |
-        Select-Object `
-            @{N='PID';E={$processId}},
-            ModuleName,
-            FileName,
-            @{N='Version';E={$_.FileVersionInfo.FileVersion}}
-} | Format-List
+PID        : 18412
+ModuleName : mod_ssl.so
+FileName   : C:\wamp64\bin\apache\apache2.4.65\modules\mod_ssl.so
+Version    : 2.4.65
+
+PID        : 18412
+ModuleName : libssl-3-x64.dll
+FileName   : C:\wamp64\bin\apache\apache2.4.65\bin\libssl-3-x64.dll
+Version    : 3.5.1
+
+PID        : 18412
+ModuleName : php8apache2_4.dll
+FileName   : C:\wamp64\bin\php\php8.5.12\php8apache2_4.dll
+Version    : 8.5.12
+
+PID        : 18412
+ModuleName : php8ts.dll
+FileName   : C:\wamp64\bin\apache\apache2.4.65\bin\php8ts.dll
+Version    : 8.5.12
+
+PID        : 18412
+ModuleName : php_com_dotnet.dll
+FileName   : c:\wamp64\bin\php\php8.5.12\ext\php_com_dotnet.dll
+Version    : 8.5.12
+
+PID        : 18412
+ModuleName : php_curl.dll
+FileName   : c:\wamp64\bin\php\php8.5.12\ext\php_curl.dll
+Version    : 8.5.0
+
+PID        : 18412
+ModuleName : libssh2.dll
+FileName   : C:\wamp64\bin\apache\apache2.4.65\bin\libssh2.dll
+Version    : 1.11.1
+
+PID        : 18412
+ModuleName : nghttp2.dll
+FileName   : C:\wamp64\bin\apache\apache2.4.65\bin\nghttp2.dll
+Version    : 1.66.0.0 (MSVC release)
+
+PID        : 18412
+ModuleName : php_fileinfo.dll
+FileName   : c:\wamp64\bin\php\php8.5.12\ext\php_fileinfo.dll
+Version    : 8.5.12
+
+PID        : 18412
+ModuleName : php_gd.dll
+FileName   : c:\wamp64\bin\php\php8.5.12\ext\php_gd.dll
+Version    : 8.5.12
+
+PID        : 18412
+ModuleName : php_gettext.dll
+FileName   : c:\wamp64\bin\php\php8.5.12\ext\php_gettext.dll
+Version    : 8.5.12
+
+PID        : 18412
+ModuleName : php_gmp.dll
+FileName   : c:\wamp64\bin\php\php8.5.12\ext\php_gmp.dll
+Version    : 8.5.12
+
+PID        : 18412
+ModuleName : php_intl.dll
+FileName   : c:\wamp64\bin\php\php8.5.12\ext\php_intl.dll
+Version    : 8.5.12
+
+PID        : 18412
+ModuleName : php_ldap.dll
+FileName   : c:\wamp64\bin\php\php8.5.12\ext\php_ldap.dll
+Version    : 8.5.12
+
+PID        : 18412
+ModuleName : php_mbstring.dll
+FileName   : c:\wamp64\bin\php\php8.5.12\ext\php_mbstring.dll
+Version    : 8.5.12
+
+PID        : 18412
+ModuleName : php_exif.dll
+FileName   : c:\wamp64\bin\php\php8.5.12\ext\php_exif.dll
+Version    : 8.5.12
+
+PID        : 18412
+ModuleName : php_mysqli.dll
+FileName   : c:\wamp64\bin\php\php8.5.12\ext\php_mysqli.dll
+Version    : 8.5.12
+
+PID        : 18412
+ModuleName : php_openssl.dll
+FileName   : c:\wamp64\bin\php\php8.5.12\ext\php_openssl.dll
+Version    : 8.5.12
+
+PID        : 18412
+ModuleName : php_pdo_mysql.dll
+FileName   : c:\wamp64\bin\php\php8.5.12\ext\php_pdo_mysql.dll
+Version    : 8.5.12
+
+PID        : 18412
+ModuleName : php_pdo_odbc.dll
+FileName   : c:\wamp64\bin\php\php8.5.12\ext\php_pdo_odbc.dll
+Version    : 8.5.12
+
+PID        : 18412
+ModuleName : php_pdo_sqlite.dll
+FileName   : c:\wamp64\bin\php\php8.5.12\ext\php_pdo_sqlite.dll
+Version    : 8.5.12
+
+PID        : 18412
+ModuleName : php_pdo_sqlsrv.dll
+FileName   : c:\wamp64\bin\php\php8.5.12\ext\php_pdo_sqlsrv.dll
+Version    : 5.13.1.20429
+
+PID        : 18412
+ModuleName : php_oci8_19.DLL
+FileName   : c:\wamp64\bin\php\php8.5.12\ext\php_oci8_19.DLL
+Version    : 8.5.1
+
+PID        : 18412
+ModuleName : php_soap.dll
+FileName   : c:\wamp64\bin\php\php8.5.12\ext\php_soap.dll
+Version    : 8.5.12
+
+PID        : 18412
+ModuleName : php_sockets.dll
+FileName   : c:\wamp64\bin\php\php8.5.12\ext\php_sockets.dll
+Version    : 8.5.12
+
+PID        : 18412
+ModuleName : php_sodium.dll
+FileName   : c:\wamp64\bin\php\php8.5.12\ext\php_sodium.dll
+Version    : 8.5.12
+
+PID        : 18412
+ModuleName : php_sqlite3.dll
+FileName   : c:\wamp64\bin\php\php8.5.12\ext\php_sqlite3.dll
+Version    : 8.5.12
+
+PID        : 18412
+ModuleName : php_xsl.dll
+FileName   : c:\wamp64\bin\php\php8.5.12\ext\php_xsl.dll
+Version    : 8.5.12
+
+PID        : 18412
+ModuleName : php_zip.dll
+FileName   : c:\wamp64\bin\php\php8.5.12\ext\php_zip.dll
+Version    : 8.5.12
+
+PID        : 18412
+ModuleName : ncryptsslp.dll
+FileName   : C:\Windows\system32\ncryptsslp.dll
+Version    : 10.0.20348.2849 (WinBuild.160101.0800)
+
+PID        : 19304
+ModuleName : libcrypto-3-x64.dll
+FileName   : c:\wamp64\bin\apache\apache2.4.65\bin\libcrypto-3-x64.dll
+Version    : 3.5.1
+
+PID        : 19304
+ModuleName : mod_ssl.so
+FileName   : C:\wamp64\bin\apache\apache2.4.65\modules\mod_ssl.so
+Version    : 2.4.65
+
+PID        : 19304
+ModuleName : libssl-3-x64.dll
+FileName   : c:\wamp64\bin\apache\apache2.4.65\bin\libssl-3-x64.dll
+Version    : 3.5.1
+
+PID        : 19304
+ModuleName : php8apache2_4.dll
+FileName   : C:\wamp64\bin\php\php8.5.12\php8apache2_4.dll
+Version    : 8.5.12
+
+PID        : 19304
+ModuleName : php8ts.dll
+FileName   : c:\wamp64\bin\apache\apache2.4.65\bin\php8ts.dll
+Version    : 8.5.12
+
+PID        : 19304
+ModuleName : php_com_dotnet.dll
+FileName   : c:\wamp64\bin\php\php8.5.12\ext\php_com_dotnet.dll
+Version    : 8.5.12
+
+PID        : 19304
+ModuleName : php_curl.dll
+FileName   : c:\wamp64\bin\php\php8.5.12\ext\php_curl.dll
+Version    : 8.5.0
+
+PID        : 19304
+ModuleName : libssh2.dll
+FileName   : c:\wamp64\bin\apache\apache2.4.65\bin\libssh2.dll
+Version    : 1.11.1
+
+PID        : 19304
+ModuleName : nghttp2.dll
+FileName   : c:\wamp64\bin\apache\apache2.4.65\bin\nghttp2.dll
+Version    : 1.66.0.0 (MSVC release)
+
+PID        : 19304
+ModuleName : php_fileinfo.dll
+FileName   : c:\wamp64\bin\php\php8.5.12\ext\php_fileinfo.dll
+Version    : 8.5.12
+
+PID        : 19304
+ModuleName : php_gd.dll
+FileName   : c:\wamp64\bin\php\php8.5.12\ext\php_gd.dll
+Version    : 8.5.12
+
+PID        : 19304
+ModuleName : php_gettext.dll
+FileName   : c:\wamp64\bin\php\php8.5.12\ext\php_gettext.dll
+Version    : 8.5.12
+
+PID        : 19304
+ModuleName : php_gmp.dll
+FileName   : c:\wamp64\bin\php\php8.5.12\ext\php_gmp.dll
+Version    : 8.5.12
+
+PID        : 19304
+ModuleName : php_intl.dll
+FileName   : c:\wamp64\bin\php\php8.5.12\ext\php_intl.dll
+Version    : 8.5.12
+
+PID        : 19304
+ModuleName : php_ldap.dll
+FileName   : c:\wamp64\bin\php\php8.5.12\ext\php_ldap.dll
+Version    : 8.5.12
+
+PID        : 19304
+ModuleName : php_mbstring.dll
+FileName   : c:\wamp64\bin\php\php8.5.12\ext\php_mbstring.dll
+Version    : 8.5.12
+
+PID        : 19304
+ModuleName : php_exif.dll
+FileName   : c:\wamp64\bin\php\php8.5.12\ext\php_exif.dll
+Version    : 8.5.12
+
+PID        : 19304
+ModuleName : php_mysqli.dll
+FileName   : c:\wamp64\bin\php\php8.5.12\ext\php_mysqli.dll
+Version    : 8.5.12
+
+PID        : 19304
+ModuleName : php_openssl.dll
+FileName   : c:\wamp64\bin\php\php8.5.12\ext\php_openssl.dll
+Version    : 8.5.12
+
+PID        : 19304
+ModuleName : php_pdo_mysql.dll
+FileName   : c:\wamp64\bin\php\php8.5.12\ext\php_pdo_mysql.dll
+Version    : 8.5.12
+
+PID        : 19304
+ModuleName : php_pdo_odbc.dll
+FileName   : c:\wamp64\bin\php\php8.5.12\ext\php_pdo_odbc.dll
+Version    : 8.5.12
+
+PID        : 19304
+ModuleName : php_pdo_sqlite.dll
+FileName   : c:\wamp64\bin\php\php8.5.12\ext\php_pdo_sqlite.dll
+Version    : 8.5.12
+
+PID        : 19304
+ModuleName : php_pdo_sqlsrv.dll
+FileName   : c:\wamp64\bin\php\php8.5.12\ext\php_pdo_sqlsrv.dll
+Version    : 5.13.1.20429
+
+PID        : 19304
+ModuleName : php_oci8_19.DLL
+FileName   : c:\wamp64\bin\php\php8.5.12\ext\php_oci8_19.DLL
+Version    : 8.5.1
+
+PID        : 19304
+ModuleName : php_soap.dll
+FileName   : c:\wamp64\bin\php\php8.5.12\ext\php_soap.dll
+Version    : 8.5.12
+
+PID        : 19304
+ModuleName : php_sockets.dll
+FileName   : c:\wamp64\bin\php\php8.5.12\ext\php_sockets.dll
+Version    : 8.5.12
+
+PID        : 19304
+ModuleName : php_sodium.dll
+FileName   : c:\wamp64\bin\php\php8.5.12\ext\php_sodium.dll
+Version    : 8.5.12
+
+PID        : 19304
+ModuleName : php_sqlite3.dll
+FileName   : c:\wamp64\bin\php\php8.5.12\ext\php_sqlite3.dll
+Version    : 8.5.12
+
+PID        : 19304
+ModuleName : php_xsl.dll
+FileName   : c:\wamp64\bin\php\php8.5.12\ext\php_xsl.dll
+Version    : 8.5.12
+
+PID        : 19304
+ModuleName : php_zip.dll
+FileName   : c:\wamp64\bin\php\php8.5.12\ext\php_zip.dll
+Version    : 8.5.12
+
+
+
+PS C:\Windows\system32>
