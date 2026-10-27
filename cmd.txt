@@ -11,17 +11,43 @@ Select-String -Path "C:\wamp64\scripts\*.php" `
 C:\wamp64\bin\php\php8.5.12\php.exe -i 2>&1 |
     Select-String 'Warning|Error|Unable'
 
-PS C:\wamp64> $dir = "C:\wamp64\bin\php\php8.5.12\ext"
-PS C:\wamp64>
-PS C:\wamp64> Get-Item "$dir\php_curl.dll", "$dir\php_curl_.dll" |
->>     Select-Object Name, Length,
->>         @{N="FileVersion";E={$_.VersionInfo.FileVersion}},
->>         @{N="SHA256";E={(Get-FileHash $_.FullName -Algorithm SHA256).Hash}}
 
-Name           Length FileVersion SHA256
-----           ------ ----------- ------
-php_curl.dll   776192 8.5.0       B4E32BBC9893A55E5B3A655D336AE092023C64DF7F40E200CBBF44782EEC09BA
-php_curl_.dll 1094656 8.5.12      A5BE58045104AAA0C3A8C8DB151DC54DA192007E3253F8FE98F4EF17F57D0CD1
+$apache = "C:\wamp64\bin\apache\apache2.4.65\bin"
+$php = "C:\wamp64\bin\php\php8.5.12"
+
+$dlls = @(
+    "libssh2.dll",
+    "libssl-3-x64.dll",
+    "libcrypto-3-x64.dll",
+    "nghttp2.dll",
+    "libcurl.dll"
+)
+
+foreach ($dll in $dlls) {
+    foreach ($dir in @($apache, $php)) {
+        $file = Join-Path $dir $dll
+
+        if (Test-Path $file) {
+            Get-Item $file | Select-Object `
+                Name, DirectoryName, Length,
+                @{N="Version";E={$_.VersionInfo.FileVersion}}
+        }
+    }
+}
 
 
-PS C:\wamp64>
+
+$php = "C:\wamp64\bin\php\php8.5.12"
+
+& "$php\php.exe" -n `
+    -d "extension_dir=$php\ext" `
+    -d "extension=php_curl_.dll" `
+    -r "var_dump(extension_loaded('curl')); print_r(curl_version());"
+
+
+Get-ChildItem "C:\wamp64\bin\apache\apache2.4.65\conf" -Recurse -Filter "*.conf" |
+    Select-String -Pattern "LoadFile|LoadModule php|PHPIniDir|php8.5.0|php8.5.12"
+
+
+Get-Content "C:\wamp64\logs\apache_error.log" -Tail 150 |
+    Select-String "curl|PHP Startup|Unable to load|procedure|module"
