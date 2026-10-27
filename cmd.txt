@@ -21,3 +21,14 @@ C:\wamp64\bin\php\php8.5.12\php.exe -i 2>&1 |
 ]);
 [2026-10-27 13:05:50] test.INFO: PHP CHECK {"version":"8.5.12","sapi":"apache2handler","ini":"C:\\wamp64\\bin\\apache\\apache2.4.65\\bin\\php.ini","extension_dir":"c:/wamp64/bin/php/php8.5.12/ext/","curl_loaded":false,"curl_exists":false} 
 Select-String -Path "C:\wamp64\bin\apache\apache2.4.65\bin\php.ini" -Pattern "extension_dir|extension=curl"
+bool(true)
+PS C:\wamp64> Select-String -Path "C:\wamp64\bin\apache\apache2.4.65\bin\php.ini" -Pattern "extension_dir|extension=curl"
+
+bin\apache\apache2.4.65\bin\php.ini:764:;extension_dir = "./"
+bin\apache\apache2.4.65\bin\php.ini:766:extension_dir ="c:/wamp64/bin/php/php8.5.12/ext/"
+bin\apache\apache2.4.65\bin\php.ini:922:;   Be sure to appropriately set the extension_dir directive.
+bin\apache\apache2.4.65\bin\php.ini:926:extension=curl
+bin\apache\apache2.4.65\bin\php.ini:1033:;sqlite3.extension_dir =
+
+
+PS C:\wamp64>
