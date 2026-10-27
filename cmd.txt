@@ -11,38 +11,9 @@ Select-String -Path "C:\wamp64\scripts\*.php" `
 C:\wamp64\bin\php\php8.5.12\php.exe -i 2>&1 |
     Select-String 'Warning|Error|Unable'
 
+$dir = "C:\wamp64\bin\php\php8.5.12\ext"
 
-
-
-PS C:\wamp64> $apache = "C:\wamp64\bin\apache\apache2.4.65\bin"
-PS C:\wamp64> $php = "C:\wamp64\bin\php\php8.5.12"
-PS C:\wamp64>
-PS C:\wamp64> Get-ChildItem $apache -Filter "*.dll" |
->>     Where-Object Name -Match "curl|ssl|crypto|ssh|nghttp|zlib" |
->>     Select-Object Name, Length
-
-Name                      Length
-----                      ------
-apr_crypto_openssl-1.dll   19456
-libcrypto-3-x64.dll      7175168
-libcurl.dll               673792
-libssh2.dll                    0
-libssl-3-x64.dll         1310720
-nghttp2.dll               151552
-zlib1.dll                  90624
-
-
-PS C:\wamp64>
-PS C:\wamp64> Get-ChildItem $php -Filter "*.dll" |
->>     Where-Object Name -Match "curl|ssl|crypto|ssh|nghttp|zlib" |
->>     Select-Object Name, Length
-
-Name                 Length
-----                 ------
-libcrypto-3-x64.dll 7044608
-libssh2.dll          419840
-libssl-3-x64.dll    1294336
-nghttp2.dll          227840
-
-
-PS C:\wamp64>
+Get-Item "$dir\php_curl.dll", "$dir\php_curl_.dll" |
+    Select-Object Name, Length,
+        @{N="FileVersion";E={$_.VersionInfo.FileVersion}},
+        @{N="SHA256";E={(Get-FileHash $_.FullName -Algorithm SHA256).Hash}}
