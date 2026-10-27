@@ -13,31 +13,17 @@ C:\wamp64\bin\php\php8.5.12\php.exe -i 2>&1 |
 
 
 
-PS C:\wamp64> Get-CimInstance Win32_Process -Filter "name='httpd.exe'" |
->>     Select-Object ProcessId, CommandLine
+Get-Process httpd | ForEach-Object {
+    Write-Host "PID:" $_.Id
 
-ProcessId CommandLine
---------- -----------
-    19304
-    18412
+    try {
+        $modules = @($_.Modules)
+        Write-Host "Module Count:" $modules.Count
 
-
-PS C:\wamp64> Get-Process httpd | ForEach-Object {
->>     $p = $_
->>
->>     try {
->>         $p.Modules |
->>             Where-Object {
->>                 $_.ModuleName -match 'curl|ssl|crypto|ssh|nghttp|php'
->>             } |
->>             Select-Object `
->>                 @{N='PID';E={$p.Id}},
->>                 ModuleName,
->>                 FileName,
->>                 @{N='Version';E={$_.FileVersionInfo.FileVersion}}
->>     }
->>     catch {
->>         Write-Warning "無法讀取 PID $($p.Id) 的模組"
->>     }
->> } | Format-Table -AutoSize
-PS C:\wamp64>
+        $modules |
+            Select-Object -First 10 ModuleName, FileName
+    }
+    catch {
+        Write-Host "ERROR:" $_.Exception.Message
+    }
+}
