@@ -13,4 +13,13 @@ C:\wamp64\bin\php\php8.5.12\php.exe -i 2>&1 |
 
 
 
-C:\wamp64\bin\php\php8.5.12\php.exe -c "C:\wamp64\bin\apache\apache2.4.65\bin\php.ini" -m 2>&1 | Select-String "curl|Warning|Unable|Error"
+$apache = "C:\wamp64\bin\apache\apache2.4.65\bin"
+$php = "C:\wamp64\bin\php\php8.5.12"
+
+Get-ChildItem $apache -Filter "*.dll" |
+    Where-Object Name -Match "curl|ssl|crypto|ssh|nghttp|zlib" |
+    Select-Object Name, Length
+
+Get-ChildItem $php -Filter "*.dll" |
+    Where-Object Name -Match "curl|ssl|crypto|ssh|nghttp|zlib" |
+    Select-Object Name, Length
