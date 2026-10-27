@@ -44,6 +44,133 @@ $php = "C:\wamp64\bin\php\php8.5.12"
     -d "extension=php_curl_.dll" `
     -r "var_dump(extension_loaded('curl')); print_r(curl_version());"
 
+PS C:\wamp64> $apache = "C:\wamp64\bin\apache\apache2.4.65\bin"
+PS C:\wamp64> $php = "C:\wamp64\bin\php\php8.5.12"
+PS C:\wamp64>
+PS C:\wamp64> $dlls = @(
+>>     "libssh2.dll",
+>>     "libssl-3-x64.dll",
+>>     "libcrypto-3-x64.dll",
+>>     "nghttp2.dll",
+>>     "libcurl.dll"
+>> )
+PS C:\wamp64>
+PS C:\wamp64> foreach ($dll in $dlls) {
+>>     foreach ($dir in @($apache, $php)) {
+>>         $file = Join-Path $dir $dll
+>>
+>>         if (Test-Path $file) {
+>>             Get-Item $file | Select-Object `
+>>                 Name, DirectoryName, Length,
+>>                 @{N="Version";E={$_.VersionInfo.FileVersion}}
+>>         }
+>>     }
+>> }
+
+Name                DirectoryName                          Length Version
+----                -------------                          ------ -------
+libssh2.dll         C:\wamp64\bin\apache\apache2.4.65\bin  419840 1.11.1
+libssh2.dll         C:\wamp64\bin\php\php8.5.12            419840 1.11.1
+libssl-3-x64.dll    C:\wamp64\bin\apache\apache2.4.65\bin 1310720 3.5.1
+libssl-3-x64.dll    C:\wamp64\bin\php\php8.5.12           1294336 3.5.9
+libcrypto-3-x64.dll C:\wamp64\bin\apache\apache2.4.65\bin 7175168 3.5.1
+libcrypto-3-x64.dll C:\wamp64\bin\php\php8.5.12           7044608 3.5.9
+nghttp2.dll         C:\wamp64\bin\apache\apache2.4.65\bin  151552 1.66.0.0 (MSVC release)
+nghttp2.dll         C:\wamp64\bin\php\php8.5.12            227840 1.70.0.0 (MSVC release)
+libcurl.dll         C:\wamp64\bin\apache\apache2.4.65\bin  673792 8.14.1
+
+
+PS C:\wamp64> $php = "C:\wamp64\bin\php\php8.5.12"
+PS C:\wamp64>
+PS C:\wamp64> & "$php\php.exe" -n `
+>>     -d "extension_dir=$php\ext" `
+>>     -d "extension=php_curl_.dll" `
+>>     -r "var_dump(extension_loaded('curl')); print_r(curl_version());"
+bool(true)
+Array
+(
+    [version_number] => 530176
+    [age] => 11
+    [features] => 1437405085
+    [feature_list] => Array
+        (
+            [AsynchDNS] => 1
+            [CharConv] =>
+            [Debug] =>
+            [GSS-Negotiate] =>
+            [IDN] => 1
+            [IPv6] => 1
+            [krb4] =>
+            [Largefile] => 1
+            [libz] => 1
+            [NTLM] => 1
+            [NTLMWB] =>
+            [SPNEGO] => 1
+            [SSL] => 1
+            [SSPI] => 1
+            [TLS-SRP] =>
+            [HTTP2] => 1
+            [GSSAPI] =>
+            [KERBEROS5] => 1
+            [UNIX_SOCKETS] => 1
+            [PSL] =>
+            [HTTPS_PROXY] => 1
+            [MULTI_SSL] =>
+            [BROTLI] => 1
+            [ALTSVC] => 1
+            [HTTP3] =>
+            [UNICODE] =>
+            [ZSTD] => 1
+            [HSTS] => 1
+            [GSASL] =>
+        )
+
+    [ssl_version_number] => 0
+    [version] => 8.23.0
+    [host] => x86_64-pc-win32
+    [ssl_version] => OpenSSL/3.5.9
+    [libz_version] => 1.3.2
+    [protocols] => Array
+        (
+            [0] => dict
+            [1] => file
+            [2] => ftp
+            [3] => ftps
+            [4] => gopher
+            [5] => gophers
+            [6] => http
+            [7] => https
+            [8] => imap
+            [9] => imaps
+            [10] => ldap
+            [11] => ldaps
+            [12] => pop3
+            [13] => pop3s
+            [14] => rtsp
+            [15] => scp
+            [16] => sftp
+            [17] => smb
+            [18] => smbs
+            [19] => smtp
+            [20] => smtps
+            [21] => telnet
+            [22] => tftp
+            [23] => ws
+            [24] => wss
+        )
+
+    [ares] =>
+    [ares_num] => 0
+    [libidn] =>
+    [iconv_ver_num] => 0
+    [libssh_version] => libssh2/1.11.1
+    [brotli_ver_num] => 16785408
+    [brotli_version] => brotli/1.2.0
+)
+PS C:\wamp64>
+
+
+
 
 Get-ChildItem "C:\wamp64\bin\apache\apache2.4.65\conf" -Recurse -Filter "*.conf" |
     Select-String -Pattern "LoadFile|LoadModule php|PHPIniDir|php8.5.0|php8.5.12"
