@@ -1,115 +1,27 @@
-# Virtual Hosts
-#
-#<VirtualHost _default_:80>
-#  ServerName localhost
-#  ServerAlias localhost
-#  DocumentRoot "${INSTALL_DIR}/www"
-#  <Directory "${INSTALL_DIR}/www/">
-#    Options -Indexes +Includes +FollowSymLinks +MultiViews
-#    AllowOverride All
-#    Require all granted
-#  </Directory>
-#</VirtualHost>
-
-
-
-# Virtual Hosts
-#
-
-#<VirtualHost *:80>#
-#	ServerName localhost
-#	DocumentRoot c:/wamp64/www
-
-#	<Directory  "c:/wamp64/www/TPCT-WMS-Service/public">
-#		Options +Indexes +Includes +FollowSymLinks +MultiViews
-#		AllowOverride All
-#		Require all granted
-#	</Directory>
-
-#	<Directory  "c:/wamp64/www/">
-#		#Options +Indexes +Includes +FollowSymLinks +MultiViews
-#		#AllowOverride All
-#		Require all granted
-#	</Directory>
-#
-#	<Location "/icons/">
-#		Require all denied
-#	</Location>
-#</VirtualHost>
-
-
-<VirtualHost *:80>
-    ServerName cfs.tpct.com.tw
-    DocumentRoot "c:/wamp64/www/TPCT-WMS-Service"
-
-    <Directory "c:/wamp64/www/TPCT-WMS-Service">
-        Options +Indexes +Includes +FollowSymLinks +MultiViews
-        AllowOverride All
-        Require all granted
-    </Directory>
-</VirtualHost>
-
-<VirtualHost *:443>
-    ServerName cfs.tpct.com.tw
-    DocumentRoot "c:/wamp64/www"
-
-    SSLEngine on
-    #SSLCertificateFile "c:/wamp64/bin/apache/apache2.4.62.1/conf/SSL/2024-11-21/server.crt"
-    SSLCertificateFile "c:/wamp64/bin/apache/apache2.4.62.1/conf/SSL/20260915/fullchain.pem"
-    #SSLCertificateKeyFile "c:/wamp64/bin/apache/apache2.4.62.1/conf/SSL/2024-11-21/UPserver.key"
-    SSLCertificateKeyFile "c:/wamp64/bin/apache/apache2.4.62.1/conf/SSL/20260915/TPCT2027.key"
-    
-    RedirectMatch ^/$ /TPCT-WMS-Service/login
-    
-     <Directory "c:/wamp64/www/TPCT-WMS-Service">
-        Options +Indexes +Includes +FollowSymLinks +MultiViews
-        AllowOverride All
-        Require all granted
-    </Directory>
-</VirtualHost>
-
-
-RedirectMatch 403 ^.+\.(env|xml|json|example)$
-<IfModule mod_rewrite.c>
-    <IfModule mod_negotiation.c>
-        Options -MultiViews
-    </IfModule>
-
-    RewriteEngine On
-
-    # Redirect Trailing Slashes If Not A Folder...
-    RewriteCond %{REQUEST_FILENAME} !-d
-    RewriteRule ^(.*)/$ /$1 [L,R=301]
-
-    ## force http to https
-    RewriteCond %{SERVER_PORT} 80
-    RewriteRule ^(.*)$ https://cfs.tpct.com.tw/TPCT-WMS-Service/ [R=301,L]
-
-    ##RewriteCond %{HTTPS} !=on
-    ##RewriteRule ^(.*)$ https://cfstest.tpct.com.tw/TPCT-WMS-Service/$1 [R=301,L]
-
-
-    # Handle Front Controller...
-    RewriteCond %{REQUEST_FILENAME} !-d
-    RewriteCond %{REQUEST_FILENAME} !-f
-    RewriteRule ^ index.php [L]
-</IfModule>
-
-#Options -Indexes
-
-# 保護敏感檔案 (Apache 2.4 語法)
-#<FilesMatch "\.(env|log|bak|sql|ini|sh|bat|cmd)$">
-    #Require all denied
-#</FilesMatch>
-
-#RedirectMatch 404 /\.git
-#RedirectMatch 404 /\.svn
-
-
-
-
-#<IfModule mod_rewrite.c>
-#    RewriteEngine On
-#
-#    RewriteRule ^(.*)$ public/$1 [L]
-#</IfModule>
+PS C:\wamp64\bin\apache\apache2.4.62.1\bin> .\httpd.exe -S
+VirtualHost configuration:
+*:80                   cfs.tpct.com.tw (C:/wamp64/bin/apache/apache2.4.62.1/conf/extra/httpd-vhosts.conf:41)
+*:443                  is a NameVirtualHost
+         default server cfs.tpct.com.tw (C:/wamp64/bin/apache/apache2.4.62.1/conf/extra/httpd-vhosts.conf:52)
+         port 443 namevhost cfs.tpct.com.tw (C:/wamp64/bin/apache/apache2.4.62.1/conf/extra/httpd-vhosts.conf:52)
+         port 443 namevhost booking-test.tpct.com.tw (C:/wamp64/bin/apache/apache2.4.62.1/conf/extra/httpd-ssl.conf:121)
+ServerRoot: "C:/wamp64/bin/apache/apache2.4.62.1"
+Main DocumentRoot: "C:/wamp64/www"
+Main ErrorLog: "|bin/rotatelogs.exe -l c:/wamp64/logs/error_%Y-%m-%d.log 86400"
+Mutex rewrite-map: using_defaults
+Mutex ssl-stapling-refresh: using_defaults
+Mutex authdigest-client: using_defaults
+Mutex ssl-stapling: using_defaults
+Mutex ssl-cache: using_defaults
+Mutex default: dir="C:/wamp64/bin/apache/apache2.4.62.1/logs/" mechanism=default
+Mutex authdigest-opaque: using_defaults
+PidFile: "C:/wamp64/bin/apache/apache2.4.62.1/logs/httpd.pid"
+Define: DUMP_VHOSTS
+Define: DUMP_RUN_CFG
+Define: APACHE24=Apache2.4
+Define: VERSION_APACHE=2.4.62.1
+Define: INSTALL_DIR=c:/wamp64
+Define: APACHE_DIR=c:/wamp64/bin/apache/apache2.4.62.1
+Define: SRVROOT=c:/wamp64/bin/apache/apache2.4.62.1
+Define: PHPROOT=c:/wamp64/bin/php/php
+PS C:\wamp64\bin\apache\apache2.4.62.1\bin>
