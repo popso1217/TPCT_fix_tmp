@@ -1,3 +1,7 @@
 cd C:\wamp64\www\TPCT-WMS-Service
 
 php artisan route:list
+
+Get-ChildItem .\routes,.\app -Recurse -Filter *.php |
+    Select-String -Pattern "redirect\(|Route::redirect|redirect\(\)->route|login"
+return redirect()->route('login');
