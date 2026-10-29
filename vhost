@@ -1,1 +1,9 @@
-curl.exe -I --noproxy "*" http://127.0.0.1/TPCT-WMS-Service/login
+PS C:\Windows\system32> curl.exe -I --noproxy "*" http://127.0.0.1/TPCT-WMS-Service/login
+HTTP/1.1 404 Not Found
+Date: Thu, 29 Oct 2026 08:17:15 GMT
+Server: Apache
+Cache-Control: no-cache, private
+Set-Cookie: laravel_session=ypaa5EseidR4S4IW9G3tJ2is7cOBzQhSN6gQGrTn; expires=Thu, 29 Oct 2026 10:17:15 GMT; Max-Age=7200; path=/; httponly
+Content-Type: text/html; charset=UTF-8
+
+PS C:\Windows\system32>
