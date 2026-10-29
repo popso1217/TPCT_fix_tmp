@@ -1,1 +1,8 @@
-curl.exe -I http://127.0.0.1/
+PS C:\wamp64\bin\apache\apache2.4.62.1\bin> curl.exe -I http://127.0.0.1/
+HTTP/1.1 302 Found
+Date: Thu, 29 Oct 2026 07:25:57 GMT
+Server: Apache
+Cache-Control: no-cache, private
+Location: http://127.0.0.1/login
+Set-Cookie: laravel_session=4GKvjLpwFS0dM0xFumab3GXWwr86iPcfnN0kTK7W; expires=Thu, 29 Oct 2026 09:25:57 GMT; Max-Age=7200; path=/; httponly
+Content-Type: text/html; charset=utf-8
