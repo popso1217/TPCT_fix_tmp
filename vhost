@@ -1,0 +1,71 @@
+# Virtual Hosts
+#
+#<VirtualHost _default_:80>
+#  ServerName localhost
+#  ServerAlias localhost
+#  DocumentRoot "${INSTALL_DIR}/www"
+#  <Directory "${INSTALL_DIR}/www/">
+#    Options -Indexes +Includes +FollowSymLinks +MultiViews
+#    AllowOverride All
+#    Require all granted
+#  </Directory>
+#</VirtualHost>
+
+
+
+# Virtual Hosts
+#
+
+#<VirtualHost *:80>#
+#	ServerName localhost
+#	DocumentRoot c:/wamp64/www
+
+#	<Directory  "c:/wamp64/www/TPCT-WMS-Service/public">
+#		Options +Indexes +Includes +FollowSymLinks +MultiViews
+#		AllowOverride All
+#		Require all granted
+#	</Directory>
+
+#	<Directory  "c:/wamp64/www/">
+#		#Options +Indexes +Includes +FollowSymLinks +MultiViews
+#		#AllowOverride All
+#		Require all granted
+#	</Directory>
+#
+#	<Location "/icons/">
+#		Require all denied
+#	</Location>
+#</VirtualHost>
+
+
+<VirtualHost *:80>
+    ServerName cfs.tpct.com.tw
+    DocumentRoot "c:/wamp64/www/TPCT-WMS-Service"
+
+    <Directory "c:/wamp64/www/TPCT-WMS-Service">
+        Options +Indexes +Includes +FollowSymLinks +MultiViews
+        AllowOverride All
+        Require all granted
+    </Directory>
+</VirtualHost>
+
+<VirtualHost *:443>
+    ServerName cfs.tpct.com.tw
+    DocumentRoot "c:/wamp64/www"
+
+    SSLEngine on
+    #SSLCertificateFile "c:/wamp64/bin/apache/apache2.4.62.1/conf/SSL/2024-11-21/server.crt"
+    SSLCertificateFile "c:/wamp64/bin/apache/apache2.4.62.1/conf/SSL/20260915/fullchain.pem"
+    #SSLCertificateKeyFile "c:/wamp64/bin/apache/apache2.4.62.1/conf/SSL/2024-11-21/UPserver.key"
+    SSLCertificateKeyFile "c:/wamp64/bin/apache/apache2.4.62.1/conf/SSL/20260915/TPCT2027.key"
+    
+    RedirectMatch ^/$ /TPCT-WMS-Service/login
+    
+     <Directory "c:/wamp64/www/TPCT-WMS-Service">
+        Options +Indexes +Includes +FollowSymLinks +MultiViews
+        AllowOverride All
+        Require all granted
+    </Directory>
+</VirtualHost>
+
+
