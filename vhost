@@ -2,3 +2,6 @@
 127.0.0.1 localhost
 ::1 localhost
 172.16.1.186 cfs.tpct.com.tw
+
+ping cfs.tpct.com.tw
+curl.exe -k -I https://cfs.tpct.com.tw/
