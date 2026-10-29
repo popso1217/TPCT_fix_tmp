@@ -1,1 +1,9 @@
-curl.exe -I http://127.0.0.1/TPCT-WMS-Service/
+PS C:\wamp64\bin\apache\apache2.4.62.1\bin> curl.exe -I http://127.0.0.1/TPCT-WMS-Service/
+HTTP/1.1 404 Not Found
+Date: Thu, 29 Oct 2026 07:26:37 GMT
+Server: Apache
+Cache-Control: no-cache, private
+Set-Cookie: laravel_session=7vpDzYL0PrXNvXv1YvsPYoADiAhD4vTworu81d9Z; expires=Thu, 29 Oct 2026 09:26:37 GMT; Max-Age=7200; path=/; httponly
+Content-Type: text/html; charset=UTF-8
+
+PS C:\wamp64\bin\apache\apache2.4.62.1\bin>
