@@ -1,7 +1,96 @@
-cd C:\wamp64\www\TPCT-WMS-Service
+PS C:\wamp64\www\TPCT-WMS-Service> php artisan route:list
 
-php artisan route:list
+  GET|HEAD        / ...................................................................... generated::28mDydKAwuf0TmBV
+  GET|HEAD        acl .................................................................... generated::YUYb2MDbUvqJNODQ
+  POST            api/access ......................... generated::2Hz7GrT0bVZkjqaN › API\Access\AccessController@store
+  GET|HEAD        api/access/drivers ................. generated::hQaJuzC0IuwnCiyp › API\Access\DriverController@index
+  GET|HEAD        api/access/drivers/{id} ............. generated::Vpkyn95q2bwroZbF › API\Access\DriverController@show
+  GET|HEAD        api/access/transports ........... generated::uu9LUdb5QWGRGnNL › API\Access\TransportController@index
+  GET|HEAD        api/access/transports/{id} ....... generated::mkyHmQKJpzV5Y57c › API\Access\TransportController@show
+  GET|HEAD        api/access/{accessID} ............... generated::kJkmxSYOw3KcwDzI › API\Access\AccessController@show
+  POST            api/access/{accessID}/goods ......... generated::uVtdCZ047lse3Ifn › API\Access\GoodsController@store
+  GET|HEAD        api/access/{accessID}/goods/{goodsID} generated::c7vEsrGZRezD57uJ › API\Access\GoodsController@show
+  GET|HEAD        api/acl/categories .................. generated::5iUhEnHGGsIsFnZi › API\ACL\ACLController@categories
+  GET|HEAD        api/cfs/colors ......................... generated::bD73PumgLHgmLQ4s › API\CFS\ColorController@index
+  GET|HEAD        api/cfs/colorstest ..................... generated::Tj1Cp5Ylk7TzZYMr › API\CFS\ColorController@testc
+  GET|HEAD        api/cfs/lineColors ................. generated::uLijGv29o9CdcYJE › API\CFS\LineColorController@index
+  GET|HEAD        api/cfs/lineColors/{id} ............. generated::qbldMcEqm38vijme › API\CFS\LineColorController@show
+  GET|HEAD        api/cfs/packageUnits ............ generated::tjmIZs9EtD5CPERz › API\CFS\PackageUnitsController@index
+  GET|HEAD        api/cfs/packageUnits/{id} ........ generated::gNCSTbkEtgl0ATwl › API\CFS\PackageUnitsController@show
+  GET|HEAD        api/cfs/vslInfos ..................... generated::0ukIPSRNZtRDW6R7 › API\CFS\VSLInfoController@index
+  GET|HEAD        api/cfs/vslInfos/{id} ................. generated::BWLBJlLSD8FAihv7 › API\CFS\VSLInfoController@show
+  GET|HEAD        api/check ....................... generated::JJXlHrt8GM13QzIP › Auth\RegisterController@checkAccount
+  GET|HEAD        api/declarations ...................... external.declaration.index › API\DeclarationController@index
+  POST            api/declarations ...................... external.declaration.store › API\DeclarationController@store
+  GET|HEAD        api/declarations/{declarationID} ........ external.declaration.show › API\DeclarationController@show
+  PATCH           api/declarations/{declarationID} .... external.declaration.update › API\DeclarationController@update
+  POST            api/resetPassword ................. generated::jzvwsTu9ReNBN0BT › Auth\ResetPasswordController@reset
+  GET|HEAD        api/search ................................... external.image-manager.index › SearchController@index
+  POST            api/search ................................... external.image-manager.store › SearchController@store
+  GET|HEAD        api/search/create .......................................... search.create › SearchController@create
+  GET|HEAD        api/search/{search} ............................................ search.show › SearchController@show
+  PUT|PATCH       api/search/{search} ........................................ search.update › SearchController@update
+  DELETE          api/search/{search} ...................................... search.destroy › SearchController@destroy
+  GET|HEAD        api/search/{search}/edit ....................................... search.edit › SearchController@edit
+  GET|HEAD        api/singleImage/{id} ............ external.image-manager.single › SingleImageDownloadController@show
+  GET|HEAD        cut ....................................................................... external.declaration.cut
+  GET|HEAD        image ................................................................. external.image-manager.image
+  GET|HEAD        login ................................................... login › Auth\LoginController@showLoginForm
+  POST            login ..................................... generated::Ir98Q5OQBKFkznA8 › Auth\LoginController@login
+  POST            logout ........................................................ logout › Auth\LoginController@logout
+  POST            password/email ................... password.email › Auth\ForgotPasswordController@sendResetLinkEmail
+  GET|HEAD        password/reset ................ password.request › Auth\ForgotPasswordController@showLinkRequestForm
+  POST            password/reset ................................ password.update › Auth\ResetPasswordController@reset
+  GET|HEAD        password/reset/{token} ................. password.reset › Auth\ResetPasswordController@showResetForm
+  GET|HEAD        register ................................... register › Auth\RegisterController@showRegistrationForm
+  POST            register ............................ generated::hcFLP31LKQIxnjLH › Auth\RegisterController@register
+  GET|HEAD        reset ................................................................. external.image-manager.reset
+  GET|HEAD        search ............................................................... external.image-manager.search
+  GET|HEAD        sign ................................................................... generated::sS1YsggX2Hl5TlK5
+  GET|HEAD        test ................................................................... generated::3YLwIi1984BHIAiF
 
-Get-ChildItem .\routes,.\app -Recurse -Filter *.php |
-    Select-String -Pattern "redirect\(|Route::redirect|redirect\(\)->route|login"
-return redirect()->route('login');
+                                                                                                   Showing [48] routes
+
+PS C:\wamp64\www\TPCT-WMS-Service> Get-ChildItem .\routes,.\app -Recurse -Filter *.php |
+>>     Select-String -Pattern "redirect\(|Route::redirect|redirect\(\)->route|login"
+
+routes\web.php:17:      return redirect("/login");
+routes\web.php:18:      // return view("/login");
+routes\web.php:37:              return redirect()->to('/image');
+app\Exceptions\Handler.php:105:        return redirect()->guest(route('login'));
+app\Http\Controllers\CaseController.php:288:        // $loginResult = ftp_login($connect, $ftpAccount, $ftpPassword);
+app\Http\Controllers\DownloadController.php:164:        if (ftp_login($ftpStream, $this->ftpAccount, $this->ftpPassword
+)) {
+app\Http\Controllers\DownloadControllerbak.php:137:        if (ftp_login($ftpStream, $this->ftpAccount, $this->ftpPassw
+ord)) {
+app\Http\Controllers\ImageController.php:163:            if (ftp_login($ftpStream, $this->ftpAccount, $this->ftpPasswor
+d)) {
+app\Http\Controllers\ImageController.php:267:            if (ftp_login($ftpStream, $this->ftpAccount, $this->ftpPasswor
+d)) {
+app\Http\Controllers\ImageController.php:483:        if (ftp_login($ftpStream, $this->ftpAccount, $this->ftpPassword))
+{
+app\Http\Controllers\SingleImageDownloadController.php:57:            if (ftp_login($ftpStream, $this->ftpAccount, $thi
+s->ftpPassword)) {
+app\Http\Controllers\SingleImageDownloadController_20220927.php:51:            if (ftp_login($ftpStream, $this->ftpAcco
+unt, $this->ftpPassword)) {
+app\Http\Controllers\SingleImageDownloadController_20220927.php:117:    //         // if (ftp_login($ftpStream, $this->
+ftpAccount, $this->ftpPassword)) {
+app\Http\Controllers\Auth\LoginController.php:10:class LoginController extends Controller
+app\Http\Controllers\Auth\LoginController.php:14:    | Login Controller
+app\Http\Controllers\Auth\LoginController.php:26:     * Where to redirect users after login.
+app\Http\Controllers\Auth\LoginController.php:31:    protected $redirectView = 'login';
+app\Http\Controllers\Auth\LoginController.php:32:    protected $redirectToLogin = '/login';
+app\Http\Controllers\Auth\LoginController.php:58:        return redirect()->away('https://cfs.tpct.com.tw/');
+app\Http\Controllers\Auth\LoginController.php:72:        // redirect()->intended($this->redirectTo);
+app\Http\Controllers\Auth\LoginController.php:74:    //      return redirect()->intended('/image');
+app\Http\Controllers\Auth\LoginController.php:76:        return redirect()->intended($this->redirectTo);
+app\Http\Controllers\Auth\RegisterController.php:127:        redirect($this->redirectPath());
+app\Http\Middleware\RedirectIfAuthenticated.php:36:            return redirect('/image');
+app\Http\Middleware\VerifyACL.php:48:                    return redirect('/reset');
+app\Http\Middleware\VerifyACL.php:56:                return redirect($this->redirect);
+app\Http\Services\TEST.php:21:          if (ftp_login($ftpStream, $this->ftpAccount, $this->ftpPassword)) {
+app\Services\FTPService.php:31:         if (ftp_login($connect, $username, $password)) {
+app\Services\FTPService.php:49:         if (ftp_login($connect, $username, $password)) {
+
+
+PS C:\wamp64\www\TPCT-WMS-Service>
