@@ -1,0 +1,4 @@
+    \Log::info('noneCheckInStore params', [
+        'params' => $params,
+        'has_idCardNo_1' => array_key_exists('idCardNo_1', $params),
+    ]);
